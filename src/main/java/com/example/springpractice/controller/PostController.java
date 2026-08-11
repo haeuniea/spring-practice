@@ -27,7 +27,7 @@ public class PostController {
             sb.append(map.getKey() + " : " + map.getValue() + "\n");
         });
 
-        // param.forEach((key, value) -> sb.append(key).append(" : ").append(value).append("\n"));
+        // postData.forEach((key, value) -> sb.append(key).append(" : ").append(value).append("\n"));
 
         return sb.toString();
     }
