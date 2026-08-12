@@ -2,6 +2,8 @@ package com.example.springpractice.controller;
 
 import com.example.springpractice.data.dto.ProductDTO;
 import com.example.springpractice.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/api/v1/product-api")
 public class ProductController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     private ProductService productService;
 
     @Autowired
@@ -25,7 +28,15 @@ public class ProductController {
     // http://localhost:8080/api/v1/product-api/product/{productId}
     @GetMapping(value="/product/{productId}")
     public ProductDTO getProduct(@PathVariable String productId) {
-        return productService.getProduct(productId);
+        long startTime = System.currentTimeMillis();
+        LOGGER.info("[ProductController] perform {} of Spring Boot practice API.","getproduct");
+
+        ProductDTO productDTO = productService.getProduct(productId);
+        LOGGER.info("[ProductController] Response :: productId = {}, productName = {}, productPrice = {}, productStock = {}, Response Time = {}ms",
+                productDTO.getProductId(), productDTO.getProductName(), productDTO.getProductPrice(), productDTO.getProductStock(),
+                (System.currentTimeMillis()-startTime));
+
+        return productDTO;
     }
 
     // http://localhost:8080/api/v1/product-api/product
