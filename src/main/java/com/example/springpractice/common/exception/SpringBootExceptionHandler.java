@@ -1,4 +1,4 @@
-package com.example.springpractice.exception;
+package com.example.springpractice.common.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
