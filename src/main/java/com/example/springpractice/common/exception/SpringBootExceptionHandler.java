@@ -31,4 +31,16 @@ public class SpringBootExceptionHandler {
 
         return new ResponseEntity<>(map, responseHeaders, httpStatus);
     }
+
+    @ExceptionHandler(value = SpringBootException.class)
+    public ResponseEntity<Map<String, String>> ExceptionHandler(SpringBootException e) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("error type", e.getHttpStatusType());
+        map.put("error code", Integer.toString(e.getHttpStatusCode()));
+        map.put("message", e.getMessage());
+
+        return new ResponseEntity<>(map, responseHeaders, e.getHttpStatus());
+    }
 }

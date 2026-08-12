@@ -1,5 +1,7 @@
 package com.example.springpractice.controller;
 
+import com.example.springpractice.common.Constants.ExceptionClass;
+import com.example.springpractice.common.exception.SpringBootException;
 import com.example.springpractice.data.dto.ProductDTO;
 import com.example.springpractice.service.ProductService;
 import jakarta.validation.Valid;
@@ -72,5 +74,10 @@ public class ProductController {
     @DeleteMapping(value="/product/{productId}")
     public ProductDTO deleteProduct(@PathVariable String productId) {
         return null;
+    }
+
+    @PostMapping(value="/product/exception")
+    public void exceptionTest() throws SpringBootException {
+        throw new SpringBootException(ExceptionClass.PRODUCT, HttpStatus.BAD_REQUEST, "의도한 에러가 발생");
     }
 }
